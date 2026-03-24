@@ -17,5 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Renovate Bot GitHub Action
+        uses: renovatebot/github-action@v46.1.6
       - name: SonarCloud Scan
         uses: antonioaversa/sonarcloud-github-action@v4.0.0
