@@ -1,25 +1,15 @@
 {
+  "extends": "../../tsconfig.base.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
-    "strict": true,
-    "esModuleInterop": true,
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    //"moduleResolution": "node",
     "lib": ["DOM", "DOM.Iterable", "esnext"],
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
     "target": "ES2022",
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "noEmit": true,
     "paths": {
       "~/*": ["./src/*"]
-    },
-    "noEmit": true,
-    "allowSyntheticDefaultImports": true,
-    "noFallthroughCasesInSwitch": true
+    }
   }
 }

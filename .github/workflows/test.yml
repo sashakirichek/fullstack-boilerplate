@@ -1,0 +1,117 @@
+name: Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+jobs:
+  # ── Backend: Jest ─────────────────────────────────────────────
+  test-backend:
+    name: Backend Tests (Jest)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run tests
+        working-directory: backend/node-express-backend
+        run: pnpm test
+
+      - name: Build
+        working-directory: backend/node-express-backend
+        run: pnpm build
+
+  # ── Frontend: Vitest ──────────────────────────────────────────
+  test-frontend:
+    name: Frontend Tests (Vitest)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run tests
+        working-directory: frontend/start-basic-react-query
+        run: pnpm test
+
+      - name: Build
+        working-directory: frontend/start-basic-react-query
+        run: pnpm build
+
+  # ── Trivy: security scan ──────────────────────────────────────
+  trivy:
+    name: Trivy Security Scan
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend]
+    permissions:
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: CRITICAL,HIGH
+          format: sarif
+          output: trivy-results.sarif
+
+      - name: Upload results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: trivy-results.sarif
+
+  # ── SonarCloud (optional) ─────────────────────────────────────
+  # Uncomment and add SONAR_TOKEN secret + sonar-project.properties to enable.
+  #
+  # sonarcloud:
+  #   name: SonarCloud Scan
+  #   runs-on: ubuntu-latest
+  #   needs: [test-backend, test-frontend]
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - name: SonarCloud Scan
+  #       uses: SonarSource/sonarcloud-github-action@master
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

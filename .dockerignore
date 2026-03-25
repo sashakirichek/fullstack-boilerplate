@@ -1,0 +1,36 @@
+# Version control
+.git
+.gitignore
+
+# Node dependencies (installed inside the image)
+**/node_modules/
+
+# Test files
+**/__tests__/
+**/*.test.ts
+**/*.spec.ts
+
+# Config files not needed at runtime
+**/.eslintrc*
+**/.prettierrc*
+**/.prettierignore
+**/jest.config.*
+**/vitest.config.*
+**/nodemon.json
+**/tsconfig.test.json
+
+# Build outputs from the host (image builds its own)
+**/dist/
+**/build/
+
+# Dev tooling
+**/.vscode/
+**/.devcontainer/
+**/.tanstack/
+
+# CI/CD
+.github/
+
+# Docs
+README.md
+packages/docs/

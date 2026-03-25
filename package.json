@@ -1,0 +1,13 @@
+{
+  "name": "fullstack-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "test:backend": "pnpm --filter node-express-backend run test",
+    "test:frontend": "pnpm --filter tanstack-start-example-basic-react-query run test"
+  }
+}
