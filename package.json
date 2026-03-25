@@ -2,7 +2,6 @@
   "name": "fullstack-boilerplate",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "pnpm --parallel -r run dev",
     "build": "pnpm -r run build",
