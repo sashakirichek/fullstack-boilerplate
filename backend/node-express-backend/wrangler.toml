@@ -1,0 +1,12 @@
+name = "fullstack-boilerplate"
+main = "src/worker.ts"
+compatibility_date = "2024-12-16"
+compatibility_flags = ["nodejs_compat"]
+
+[env.test]
+name = "fullstack-boilerplate"
+
+[observability]
+[observability.logs]
+enabled = true
+invocation_logs = true

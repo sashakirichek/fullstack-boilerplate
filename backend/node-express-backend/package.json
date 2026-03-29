@@ -8,14 +8,18 @@
     "build": "tsc",
     "start": "node dist/index.ts",
     "test": "jest --config jest.config.js",
-    "artillery": "artillery run artillery.yml"
+    "artillery": "artillery run artillery.yml",
+    "deploy:test": "wrangler deploy --env test",
+    "deploy:prod": "wrangler deploy"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "cloudflare": "5.2.0",
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260329.1",
     "@types/express": "^5.0.6",
     "@types/jest": "^29.5.14",
     "@types/node": "^25.5.0",
@@ -25,6 +29,7 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "wrangler": "^4.0.0"
   }
 }

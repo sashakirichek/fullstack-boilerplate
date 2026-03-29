@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "start": "pnpx srvx --prod -s dist/client dist/server/server.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "deploy:test": "npm run build && wrangler deploy --env test",
+    "deploy:prod": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.0",
@@ -25,6 +27,7 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.30.2",
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22.5.4",
     "@types/react": "^19.0.8",
@@ -34,6 +37,7 @@
     "tailwindcss": "^4.2.2",
     "typescript": "^5.7.2",
     "vite": "^8.0.0",
-    "vitest": "4.1.1"
+    "vitest": "4.1.1",
+    "wrangler": "^4.0.0"
   }
 }

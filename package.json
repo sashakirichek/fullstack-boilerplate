@@ -7,6 +7,7 @@
     "build": "pnpm -r run build",
     "test": "pnpm -r run test",
     "test:backend": "pnpm --filter node-express-backend run test",
-    "test:frontend": "pnpm --filter tanstack-start-example-basic-react-query run test"
+    "test:frontend": "pnpm --filter tanstack-start-example-basic-react-query run test",
+    "deploy:test": "pnpm --filter tanstack-start-example-basic-react-query run build && pnpm --filter node-express-backend run deploy:test && pnpm --filter tanstack-start-example-basic-react-query run deploy:test"
   }
 }
