@@ -6,6 +6,11 @@ compatibility_flags = ["nodejs_compat"]
 [env.test]
 name = "fullstack-boilerplate"
 
+[[d1_databases]]
+binding = "DB"
+database_name = "fullstack-db"
+database_id = "<YOUR_DATABASE_ID>"
+
 [observability]
 [observability.logs]
 enabled = true

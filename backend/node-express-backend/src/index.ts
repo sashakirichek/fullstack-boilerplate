@@ -1,10 +1,13 @@
 import {env} from 'cloudflare:workers'
-import {httpServerHandler} from 'cloudflare:node'
-import app from './server'
+import {createApp} from './server'
+
+interface CloudflareEnv {
+  DB: D1Database
+}
+
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001
+const app = createApp((env as unknown as CloudflareEnv).DB)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })
-
-export default httpServerHandler({port: PORT})

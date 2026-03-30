@@ -1,13 +1,17 @@
 {
   "name": "node-express-backend",
   "version": "1.0.0",
-  "description": "node express backend with redis setup. Basic middlewares, error handling, maybe graphQl test endpoints",
+  "description": "Express backend on Cloudflare Workers with D1 database and Prisma ORM",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
-    "build": "tsc",
+    "dev": "wrangler dev",
+    "build": "prisma generate && tsc",
     "start": "node dist/index.ts",
     "test": "jest --config jest.config.js",
+    "postinstall": "prisma generate",
+    "prisma:generate": "prisma generate",
+    "db:migrate:local": "wrangler d1 migrations apply fullstack-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply fullstack-db --remote",
     "artillery": "artillery run artillery.yml",
     "deploy:test": "wrangler deploy --env test",
     "deploy:prod": "wrangler deploy"
@@ -15,6 +19,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@prisma/adapter-d1": "^6.0.0",
+    "@prisma/client": "^6.0.0",
     "cloudflare": "5.2.0",
     "express": "^5.2.1"
   },
@@ -26,6 +32,7 @@
     "@types/supertest": "^6.0.2",
     "jest": "^29.7.0",
     "nodemon": "^3.1.14",
+    "prisma": "^6.0.0",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",

@@ -1,7 +1,9 @@
 import request from 'supertest'
-import app from '../server'
+import {createApp} from '../server'
 
 describe('Express Server', () => {
+  const app = createApp({} as any)
+
   it('GET / should return 200 with running message', async () => {
     const response = await request(app).get('/')
     expect(response.status).toBe(200)

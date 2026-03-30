@@ -1,22 +1,20 @@
-import { queryOptions } from '@tanstack/react-query'
-import { notFound } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
+import {queryOptions} from '@tanstack/react-query'
+import {notFound} from '@tanstack/react-router'
+import {createServerFn} from '@tanstack/react-start'
 import axios from 'redaxios'
 
 export type PostType = {
-  id: string
+  id: number
   title: string
   body: string
 }
 
-export const fetchPosts = createServerFn({ method: 'GET' }).handler(
-  async () => {
-    console.info('Fetching posts...')
-    return axios
-      .get<Array<PostType>>('https://jsonplaceholder.typicode.com/posts')
-      .then((r) => r.data.slice(0, 10))
-  },
-)
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3001'
+
+export const fetchPosts = createServerFn({method: 'GET'}).handler(async () => {
+  console.info('Fetching posts...')
+  return axios.get<{items: Array<PostType>}>(BACKEND_URL + '/posts').then(r => r.data.items)
+})
 
 export const postsQueryOptions = () =>
   queryOptions({
@@ -24,14 +22,14 @@ export const postsQueryOptions = () =>
     queryFn: () => fetchPosts(),
   })
 
-export const fetchPost = createServerFn({ method: 'GET' })
+export const fetchPost = createServerFn({method: 'GET'})
   .inputValidator((d: string) => d)
-  .handler(async ({ data }) => {
+  .handler(async ({data}) => {
     console.info(`Fetching post with id ${data}...`)
     const post = await axios
-      .get<PostType>(`https://jsonplaceholder.typicode.com/posts/${data}`)
-      .then((r) => r.data)
-      .catch((err) => {
+      .get<PostType>(`${BACKEND_URL}/posts/${data}`)
+      .then(r => r.data)
+      .catch(err => {
         console.error(err)
         if (err.status === 404) {
           throw notFound()
@@ -45,5 +43,5 @@ export const fetchPost = createServerFn({ method: 'GET' })
 export const postQueryOptions = (postId: string) =>
   queryOptions({
     queryKey: ['post', postId],
-    queryFn: () => fetchPost({ data: postId }),
+    queryFn: () => fetchPost({data: postId}),
   })

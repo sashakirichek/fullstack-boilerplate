@@ -1,7 +1,12 @@
-import app from './server'
+import {createApp} from './server'
+
+interface Env {
+  DB: D1Database
+}
 
 export default {
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const app = createApp(env.DB)
     const url = new URL(request.url)
 
     const body = request.body ? Buffer.from(await request.arrayBuffer()) : null

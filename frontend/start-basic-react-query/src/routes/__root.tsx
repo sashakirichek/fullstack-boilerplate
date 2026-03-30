@@ -1,19 +1,13 @@
 /// <reference types="vite/client" />
-import {
-  HeadContent,
-  Link,
-  Outlet,
-  Scripts,
-  createRootRouteWithContext,
-} from '@tanstack/react-router'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import {HeadContent, Link, Outlet, Scripts, createRootRouteWithContext} from '@tanstack/react-router'
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
+import {TanStackRouterDevtools} from '@tanstack/react-router-devtools'
 import * as React from 'react'
-import type { QueryClient } from '@tanstack/react-query'
-import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
-import { NotFound } from '~/components/NotFound'
+import type {QueryClient} from '@tanstack/react-query'
+import {DefaultCatchBoundary} from '~/components/DefaultCatchBoundary'
+import {NotFound} from '~/components/NotFound'
 import appCss from '~/styles/app.css?url'
-import { seo } from '~/utils/seo'
+import {seo} from '~/utils/seo'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -28,13 +22,12 @@ export const Route = createRootRouteWithContext<{
         content: 'width=device-width, initial-scale=1',
       },
       ...seo({
-        title:
-          'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
-        description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
+        title: 'Fullstack Boilerplate',
+        description: 'Full-stack app with TanStack Start, Express, Cloudflare D1 & Prisma.',
       }),
     ],
     links: [
-      { rel: 'stylesheet', href: appCss },
+      {rel: 'stylesheet', href: appCss},
       {
         rel: 'apple-touch-icon',
         sizes: '180x180',
@@ -52,11 +45,11 @@ export const Route = createRootRouteWithContext<{
         sizes: '16x16',
         href: '/favicon-16x16.png',
       },
-      { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
-      { rel: 'icon', href: '/favicon.ico' },
+      {rel: 'manifest', href: '/site.webmanifest', color: '#fffff'},
+      {rel: 'icon', href: '/favicon.ico'},
     ],
   }),
-  errorComponent: (props) => {
+  errorComponent: props => {
     return (
       <RootDocument>
         <DefaultCatchBoundary {...props} />
@@ -75,7 +68,7 @@ function RootComponent() {
   )
 }
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({children}: {children: React.ReactNode}) {
   return (
     <html>
       <head>
@@ -88,7 +81,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             activeProps={{
               className: 'font-bold',
             }}
-            activeOptions={{ exact: true }}
+            activeOptions={{exact: true}}
           >
             Home
           </Link>{' '}
@@ -107,31 +100,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             }}
           >
             Users
-          </Link>{' '}
-          <Link
-            to="/route-a"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Pathless Layout
-          </Link>{' '}
-          <Link
-            to="/deferred"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Deferred
-          </Link>{' '}
-          <Link
-            // @ts-expect-error
-            to="/this-route-does-not-exist"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            This Route Does Not Exist
           </Link>
         </div>
         <hr />
