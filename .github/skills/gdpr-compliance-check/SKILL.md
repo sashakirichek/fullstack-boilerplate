@@ -28,9 +28,9 @@ lets users create accounts or profiles.
    cookies tied to a person, or any combination that can single out an individual.
 3. For each personal data field, verify there is a documented lawful basis (consent, contract, legitimate interest, or
    legal obligation) and that the purpose is explicit and limited.
-4. Check that data minimization is respected: only collect fields the feature actually needs, avoid logging personal data
-   at debug or info level, and do not copy personal data into caches, search indexes, or analytics pipelines without
-   review.
+4. Check that data minimization is respected: only collect fields the feature actually needs, avoid logging personal
+   data at debug or info level, and do not copy personal data into caches, search indexes, or analytics pipelines
+   without review.
 5. Review data-subject rights support: can a user request access to, correction of, or deletion of their personal data?
    If deletion is supported, verify it cascades through backups, logs, and third-party integrations.
 6. Check data retention: personal data should have a defined lifetime or cleanup mechanism. Look for unbounded growth of
@@ -66,8 +66,8 @@ lets users create accounts or profiles.
 | 7   | Consent mechanism (where consent is the lawful basis)              | ✅ / ⚠️ / ❌ / — |         |             |
 | 8   | Overall: personal data processing present?                         | ✅ / Not Present |         |             |
 
-> Fill one status per row: **✅** pass, **⚠️** warning, **❌** fail, **—** not applicable.
-> For each ❌ or ⚠️, describe the fix in the last column (or "pending" if unresolved).
+> Fill one status per row: **✅** pass, **⚠️** warning, **❌** fail, **—** not applicable. For each ❌ or ⚠️, describe
+> the fix in the last column (or "pending" if unresolved).
 
 ### Findings
 
