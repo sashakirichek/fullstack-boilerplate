@@ -20,3 +20,7 @@
   implementation explicit about algorithms, claims, redirects, and secret placement.
 - If a task adds personal data collection, storage, logging, or user profiles, run `/gdpr-compliance-check` and verify
   lawful basis, data minimization, retention, and data-subject rights before merging.
+- For code-quality review, use `/clean-code-naming` (names, comments, formatting), `/clean-code-functions` (size,
+  responsibility, arguments, class cohesion), `/clean-code-error-handling` (exceptions, null safety, boundary
+  isolation), or `/clean-code-test-hygiene` (F.I.R.S.T., coverage, test clarity). Run the relevant skill when the change
+  warrants a focused review.
