@@ -1,13 +1,3 @@
-import {env} from 'cloudflare:workers'
-import {createApp} from './server'
-
-interface CloudflareEnv {
-  DB: D1Database
-}
-
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3001
-const app = createApp((env as unknown as CloudflareEnv).DB)
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+// Local dev and Workers deploy both use worker.ts via `wrangler dev`.
+// This file re-exports for backward compatibility.
+export {default} from './worker'

@@ -14,3 +14,12 @@ model Post {
   title String
   body  String
 }
+
+model User {
+  id         String @id
+  provider   String
+  providerId String @map("provider_id")
+  createdAt  String @default("") @map("created_at")
+
+  @@unique([provider, providerId])
+}

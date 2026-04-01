@@ -6,6 +6,7 @@ import * as React from 'react'
 import type {QueryClient} from '@tanstack/react-query'
 import {DefaultCatchBoundary} from '~/components/DefaultCatchBoundary'
 import {NotFound} from '~/components/NotFound'
+import {AuthStatus} from '~/components/AuthStatus'
 import appCss from '~/styles/app.css?url'
 import {seo} from '~/utils/seo'
 
@@ -101,6 +102,9 @@ function RootDocument({children}: {children: React.ReactNode}) {
           >
             Users
           </Link>
+          <div className="ml-auto">
+            <AuthStatus />
+          </div>
         </div>
         <hr />
         {children}

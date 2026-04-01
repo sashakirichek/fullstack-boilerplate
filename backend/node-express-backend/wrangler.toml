@@ -1,7 +1,10 @@
 name = "fullstack-boilerplate"
 main = "src/worker.ts"
-compatibility_date = "2024-12-16"
+compatibility_date = "2026-03-01"
 compatibility_flags = ["nodejs_compat"]
+
+[dev]
+port = 3001
 
 [env.test]
 name = "fullstack-boilerplate"
@@ -10,6 +13,14 @@ name = "fullstack-boilerplate"
 binding = "DB"
 database_name = "fullstack-db"
 database_id = "<YOUR_DATABASE_ID>"
+
+# Auth – set real values via `wrangler secret put <NAME>` for production.
+# For local dev, set them here or in a .dev.vars file.
+[vars]
+APP_URL = "http://localhost:3000"
+BACKEND_URL = "http://localhost:3001"
+# GOOGLE_CLIENT_ID = ""
+# GOOGLE_CLIENT_SECRET = ""
 
 [observability]
 [observability.logs]
